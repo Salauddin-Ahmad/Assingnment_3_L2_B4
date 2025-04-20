@@ -1,14 +1,22 @@
 import { Router } from "express";
-import Module from "module";
 
 const router = Router();
 
-const ModuleRoutes = [
+const moduleRoutes = [
     {
-        path: "/",
-        // Module:, 
+        path: "/auth",
+        module: authRoutes, 
+    },
+    {
+        path: "/api/auth/register",
+        // Module: 
     }
 ]
 
+moduleRoutes.forEach(({ path, module }) => {
+    if (module){
+      router.use(path, module)
+    }
+  } );
 
 export default router;

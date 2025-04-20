@@ -9,7 +9,7 @@ const PORT = 3000;
 let server: Server;
 
 const uri: any = process.env.DATABASE_URL;
-console.log(uri);
+
 async function connectDB() {
   try {
     // Create a Mongoose client with a MongoClientOptions object to set the Stable API version
