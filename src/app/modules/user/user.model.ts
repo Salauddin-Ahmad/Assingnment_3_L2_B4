@@ -11,3 +11,5 @@ const userSchmea = new Schema<Tuser, TuserModel>(
   },
   { timestamps: true }
 );
+
+export const User = userSchmea;
