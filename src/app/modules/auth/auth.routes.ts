@@ -3,13 +3,8 @@ import express from 'express';
 const router = express.Router();
 
 
-router.post('/login', (req, res) => {
-    // Handle login logic here
-    res.send('Login route');
-})
-
-router.post('/register')
+router.post('/register-user', usercontroller.createUser);
 
 
-// export default authRoutes;
-export const authRoutes = router
+// export default registerUserRoutes;
+export const registerUserRoutes = router
