@@ -1,7 +1,7 @@
-import { Model } from "mongoose";
+import { Model, Types } from "mongoose";
 
-export interface Tuser extends Document {
-  _id: string;
+export interface Tuser {
+  _id: Types.ObjectId;
   name: string;
   email: string;
   password: string;
@@ -10,12 +10,12 @@ export interface Tuser extends Document {
   timestamps: boolean;
 }
 
-export interface TuserRegister {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-}
+// export interface TuserRegister {
+//   id: string;
+//   name: string;
+//   email: string;
+//   password: string;
+// }
 
 export interface TuserModel extends Model<Tuser> {
     // custom methods

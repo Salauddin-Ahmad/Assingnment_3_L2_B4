@@ -10,18 +10,18 @@ let server: Server;
 
 const uri: any = process.env.DATABASE_URL;
 
+
 async function connectDB() {
   try {
-    // Create a Mongoose client with a MongoClientOptions object to set the Stable API version
     await mongoose.connect(uri);
-    console.log(
-      "Pinged your deployment. You successfully connected to MongoDB!"
-    );
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await mongoose.disconnect();
+    console.log("✅ Connected to MongoDB successfully!");
+  } catch (err) {
+    console.error("❌ MongoDB connection failed:", err);
+    process.exit(1); // Optional: shut down app on failure
   }
 }
+
+
 
 
 

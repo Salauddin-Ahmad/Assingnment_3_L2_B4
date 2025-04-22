@@ -1,21 +1,28 @@
-import { Request, Response } from 'express';
-import { TuserRegister } from './user.interface';
+import { NextFunction, Request, Response } from "express";
 import { User } from "./user.model";
+import { UserService } from "./user.service";
 
-const registerUser = async (req: Request<{}, {}, TuserRegister>, res: Response )=> {
+const registerUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const user = UserService.registerService(req.body);
+    res.status(201).json({
+      status: "success",
+      message: "User registered successfully",
+      data: user,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message || "Something went wrong",
+    });
+    next(error);
+  }
+};
 
-    const { name, email, password } = req.body;
-    try {
-        // Check if user already exists
-        const userExists = await User.findOne({email});
-    } catch (error) {
-        res.status(500).json({ message: "User already exists" });
-    }
-//   create new user
-const user = await User.create({
-    name,
-    email,
-    password
-})
-
-}
+export const UserController = {
+  registerUser,
+};
