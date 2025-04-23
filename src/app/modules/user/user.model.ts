@@ -13,5 +13,5 @@ const userSchema = new Schema<Tuser, TuserModel>(
   { timestamps: true }
 );
 
-export const User = model <Tuser, TuserModel>("User", userSchema, "userCollection"); 
+export const User = model <Tuser, TuserModel>("Users", userSchema, "userCollection"); 
 
