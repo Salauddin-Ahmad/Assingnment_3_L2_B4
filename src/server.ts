@@ -3,12 +3,13 @@ import app from "./app";
 import dotenv from "dotenv";
 
 import mongoose from "mongoose";
+import { config } from "./app/config";
 dotenv.config(); // Load environment variables
 
-const PORT = 3000;
+const PORT = config.port;
 let server: Server;
 
-const uri: any = process.env.DATABASE_URL;
+const uri: any = config.db_url; // MongoDB connection string
 
 
 async function connectDB() {
@@ -24,7 +25,6 @@ async function connectDB() {
 
 
 
-
 async function bootstrap() {
   await connectDB(); // Ensure the database connects before starting the server
 
@@ -34,3 +34,22 @@ async function bootstrap() {
 }
 
 bootstrap();
+
+
+process.on("unhandledRejection", (error) => {
+  console.error("Unhandled Rejection:", error);
+  if (server) {
+    server.close(() => {
+      process.exit(1); // Exit process with failure
+    });
+  } 
+})
+
+process.on("uncaughtException", (error) => {
+  console.error(`👻 unhandled rejection detected, shutting down server ...`, error);
+  if (server) {
+    server.close(() => {
+      process.exit(1); // Exit process with failure
+    });
+  }
+})

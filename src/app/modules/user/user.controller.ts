@@ -8,20 +8,32 @@ const registerUser = async (
   next: NextFunction
 ) => {
   try {
-    const user = UserService.registerService(req.body);
+    const user = await UserService.registerService(req.body);
     res.status(201).json({
       status: "success",
       message: "User registered successfully",
-      data: user,
+      statusCode: 201,
+      data: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+      },
     });
+    console.log("user data", user);
   } catch (error: any) {
     res.status(500).json({
       success: false,
-      message: error.message || "Something went wrong",
+      message: "Validation error",
+      statusCode: 400,
+      error: error,
+      stack: "error stack"
     });
+
+    console.error("Full error", error);
     next(error);
   }
 };
+
 
 export const UserController = {
   registerUser,

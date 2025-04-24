@@ -29,6 +29,15 @@ app.get('/', (req: Request, res: Response) => {
   });
 });
 
+app
+
+app.use('*', (req: Request, res: Response) => {
+  res.status(404).json({
+    success: false,
+    message: 'Route Not Found',
+  });
+});
+
 // Error Handling Middleware
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);

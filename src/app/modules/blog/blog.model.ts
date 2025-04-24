@@ -1,7 +1,8 @@
-import { Schema } from "mongoose";
+import { model, Schema } from "mongoose";
 import { Tblog } from "./blog.interface";
 
-export const blogModel = new Schema<Tblog>(
+
+const blogModel = new Schema<Tblog>(
   {
     title: { type: String, required: true },
     content: { type: String, required: true },
@@ -10,4 +11,6 @@ export const blogModel = new Schema<Tblog>(
   },
   { timestamps: true }
 );
+
+export const blogCollection =  model<Tblog>("Blogs", blogModel, "blogCollection");
 

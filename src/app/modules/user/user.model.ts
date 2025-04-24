@@ -1,6 +1,10 @@
 import { Schema, model } from "mongoose";
 import { Tuser, TuserModel } from "./user.interface";
 
+
+
+// TuserModel is for custom methods
+// Tuser is for the schema definition
 const userSchema = new Schema<Tuser, TuserModel>(
   {
     // id: { type: String, required: true, unique: true },
