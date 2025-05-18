@@ -12,7 +12,7 @@ import { TErrorSources, TGenericErrorResponse } from "../middlewares/globalErroH
 
 type ZodIssue = ZodError['issues'][number]; // ✅ type-safe alias for ZodIssue
 
-const handleZodError = (err: ZodError): TGenericErrorResponse => {
+export const handleZodError = (err: ZodError): TGenericErrorResponse => {
   const errorSources: TErrorSources = err.issues.map((issue: ZodIssue) => {
     return {
       path: issue?.path[issue.path.length - 1], // ✅ last segment
@@ -29,4 +29,4 @@ const handleZodError = (err: ZodError): TGenericErrorResponse => {
   };
 };
 
-export default handleZodError;
+export const handleValidationError = (err)
