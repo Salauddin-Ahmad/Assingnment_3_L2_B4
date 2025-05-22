@@ -10,6 +10,16 @@ export interface Tuser {
   timestamps: boolean;
 }
 
+
+export const userRole = {
+  ADMIN: 'admin',
+  USER: 'user'
+} as const;
+
+
+export type TuserRole = keyof typeof userRole;
+
+
 // export interface TuserRegister {
 //   id: string;
 //   name: string;
