@@ -1,3 +1,4 @@
+import { TuserRegister } from './user.interface';
 import { Model, Types } from "mongoose";
 
 export interface Tuser {
@@ -15,6 +16,8 @@ export const userRole = {
   ADMIN: 'admin',
   USER: 'user'
 } as const;
+
+
 
 
 export type TuserRole = keyof typeof userRole;

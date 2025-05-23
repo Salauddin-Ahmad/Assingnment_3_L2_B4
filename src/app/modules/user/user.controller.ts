@@ -26,7 +26,7 @@ const registerUser = async (
       message: "Validation error",
       statusCode: 400,
       error: error,
-      stack: "error stack"
+      stack: "error stack",
     });
 
     console.error("Full error", error);
@@ -34,7 +34,29 @@ const registerUser = async (
   }
 };
 
+const loginUser = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({
+      email: email,
+      password: password,
+    });
+
+    if (!user) {
+      return res.status(401).json({
+        status: "fail",
+        message: "Invalid email or password",
+        statusCode: 401,
+      });
+    }
+    res.status(200).json({
+      status: "success",
+    });
+    console.log("user data", user);
+  } catch (error: any) {}
+};
 
 export const UserController = {
   registerUser,
+  loginUser,
 };

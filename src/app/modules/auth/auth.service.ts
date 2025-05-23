@@ -1,4 +1,5 @@
-import { TuserRegister } from "../user/user.interface";
+// import { TuserRegister } from "../user/user.interface";
+import { Tuser } from "../user/user.interface";
 import { User } from "../user/user.model";
 
 const registerUser = async (payload: TuserRegister) => {
@@ -19,3 +20,13 @@ const registerUser = async (payload: TuserRegister) => {
 
     return { message: "User registered successfully" };
 };
+
+    const loginUser = async (payload: Tuser) => {
+        console.log("payload", payload);
+    }
+
+
+export const AuthService = {
+    registerUser,
+    loginUser,
+}
