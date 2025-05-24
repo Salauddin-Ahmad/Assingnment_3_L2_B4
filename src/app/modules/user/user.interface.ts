@@ -1,4 +1,4 @@
-import { TuserRegister } from './user.interface';
+// import { TuserRegister } from './user.interface';
 import { Model, Types } from "mongoose";
 
 export interface Tuser {
@@ -18,18 +18,14 @@ export const userRole = {
 } as const;
 
 
-
-
 export type TuserRole = keyof typeof userRole;
 
 
-// export interface TuserRegister {
-//   id: string;
-//   name: string;
-//   email: string;
-//   password: string;
-// }
-
 export interface TuserModel extends Model<Tuser> {
-    // custom methods
+    checkUserExistsByEmail(email: string): Promise<Tuser>;
+
+    // ispasswordMatched(
+    //   plainTextPassword: string,
+    //   hashedPassword: string,
+    // ) : Promise<boolean>;
 }   

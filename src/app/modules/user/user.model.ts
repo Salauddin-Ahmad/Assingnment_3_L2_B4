@@ -1,8 +1,6 @@
 import { Schema, model } from "mongoose";
 import { Tuser, TuserModel } from "./user.interface";
 
-
-
 // TuserModel is for custom methods
 // Tuser is for the schema definition
 const userSchema = new Schema<Tuser, TuserModel>(
@@ -17,5 +15,17 @@ const userSchema = new Schema<Tuser, TuserModel>(
   { timestamps: true }
 );
 
-export const User = model <Tuser, TuserModel>("Users", userSchema, "userCollection"); 
+userSchema.statics.checkUserExistsByEmail = async function (email: string) {
+  return this.findOne({ email });
+};
 
+userSchema.pre("save", async function (next) {
+  const user = this;
+  console.log(user, "pre save hook called");
+});
+
+export const User = model<Tuser, TuserModel>(
+  "Users",
+  userSchema,
+  "userCollection"
+);

@@ -34,29 +34,37 @@ const registerUser = async (
   }
 };
 
-const loginUser = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { email, password } = req.body;
-    const user = await User.findOne({
-      email: email,
-      password: password,
-    });
+// const loginUsers = async (req: any , res: any, next: any) => {
+//   try {
+//     const { email, password } = req.body;
+//     const user = await User.findOne({
+//       email: email,
+//       password: password,
+//     });
 
-    if (!user) {
-      return res.status(401).json({
-        status: "fail",
-        message: "Invalid email or password",
-        statusCode: 401,
-      });
-    }
-    res.status(200).json({
-      status: "success",
-    });
-    console.log("user data", user);
-  } catch (error: any) {}
-};
+//     if (!user) {
+//       return res.status(401).json({
+//         status: "fail",
+//         message: "Invalid email or password",
+//         statusCode: 401,
+//       });
+//     }
+//     res.status(200).json({
+//       status: "success",
+//     });
+//     console.log("user data", user);
+//   } catch (error: any) {
+//     res.status(500).json({
+//       success: false,
+//       message: "Validation error",
+//       statusCode: 400,
+//       error: error,
+//       stack: "error stack",
+//     })
+//   }
+// };
 
 export const UserController = {
   registerUser,
-  loginUser,
+  // loginUsers,
 };
