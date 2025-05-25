@@ -11,11 +11,13 @@ const userSchema = new Schema<Tuser, TuserModel>(
     password: { type: String, required: true },
     role: { type: String, required: true, default: "user" },
     isBlocked: { type: Boolean, required: false, default: false },
+    isDeleted: { type: Boolean, required: false, default: false },
   },
   { timestamps: true }
 );
 
 userSchema.statics.checkUserExistsByEmail = async function (email: string) {
+  console.log(this)
   return this.findOne({ email });
 };
 

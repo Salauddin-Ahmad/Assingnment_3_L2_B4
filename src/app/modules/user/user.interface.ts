@@ -9,6 +9,7 @@ export interface Tuser {
   role: string;
   isBlocked: boolean;
   timestamps: boolean;
+  isDeleted?: boolean;
 }
 
 
