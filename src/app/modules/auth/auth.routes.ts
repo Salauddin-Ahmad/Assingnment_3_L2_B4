@@ -6,10 +6,10 @@ import { AuthController } from "./auth.controller";
 
 const router = express.Router();
 
-router.post("/register-user", UserController.registerUser);
+router.post("/register", UserController.registerUser);
 
 router.post(
-  "/login-user",
+  "/login",
   validateRequest(Authvalidation.loginValidatioinSchema),
   AuthController.loginUser
 );

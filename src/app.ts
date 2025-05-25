@@ -17,7 +17,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api/v1/', router)
+app.use('/api/', router)
 
 // Simple GET API
 

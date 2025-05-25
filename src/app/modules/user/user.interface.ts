@@ -7,6 +7,7 @@ export interface Tuser {
   email: string;
   password: string;
   role: string;
+  status: 'active' | 'blocked';
   isBlocked: boolean;
   timestamps: boolean;
   isDeleted?: boolean;
@@ -25,8 +26,9 @@ export type TuserRole = keyof typeof userRole;
 export interface TuserModel extends Model<Tuser> {
     checkUserExistsByEmail(email: string): Promise<Tuser>;
 
-    // ispasswordMatched(
-    //   plainTextPassword: string,
-    //   hashedPassword: string,
-    // ) : Promise<boolean>;
+    isPasswordMatched(
+      plainTextPassword: string,
+      hashedPassword: string,
+    ) : Promise<boolean>;
+
 }   

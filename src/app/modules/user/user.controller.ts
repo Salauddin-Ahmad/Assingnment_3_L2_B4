@@ -21,7 +21,7 @@ const registerUser = async (
     });
     console.log("user data", user);
   } catch (error: any) {
-    res.status(500).json({
+    res.status(400).json({
       success: false,
       message: "Validation error",
       statusCode: 400,
