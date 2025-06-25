@@ -18,5 +18,20 @@ const blogValidationSchema = z.object({
     })
 });
 
-export default blogValidationSchema;
-    
+
+const createBlogPostSchema = z.object({
+    title: z.string().min(3, { message: "Title must be at least 3 characters" }),
+    content: z.string().min(10, { message: "Content must be at least 10 characters" }),
+})
+
+const updateBlogPost = z.object({
+    title: z.string().optional(),
+    content: z.string().optional(),
+    isPublished: z.boolean().optional(),
+}); 
+
+export const blogValidations = {
+    blogValidationSchema,
+    createBlogPostSchema,
+    updateBlogPost
+}

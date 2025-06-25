@@ -10,11 +10,11 @@ const registerUser = async (
   try {
     const user = await UserService.registerService(req.body);
     res.status(201).json({
-      status: "success",
+      success: "true",
       message: "User registered successfully",
       statusCode: 201,
       data: {
-        id: user._id,
+        _id: user._id,
         name: user.name,
         email: user.email,
       },
@@ -25,7 +25,7 @@ const registerUser = async (
       success: false,
       message: "Validation error",
       statusCode: 400,
-      error: error,
+      error: error.message || "An error occurred",
       stack: "error stack",
     });
 

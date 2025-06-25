@@ -1,16 +1,15 @@
 import  express  from 'express';
-import { Tblog } from './blog.interface';
 import validateRequest from '../../middlewares/validateRequests';
-import blogValidationSchema from './blog.validation';
 import { BlogController } from './blog.controller';
+import { blogValidations } from './blog.validation';
 
 
 const router = express.Router();
 
 
-router.post('/create',
-    validateRequest(blogValidationSchema),
+router.post('/',
+    // validateRequest(blogValidations.blogValidationSchema),
     BlogController.createBlogPost,
 )
 
-export const BlogRoutes = router;
+export const BlogRoutes = router;   
