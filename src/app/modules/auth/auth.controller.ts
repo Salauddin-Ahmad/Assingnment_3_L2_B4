@@ -6,7 +6,8 @@ import { StatusCodes } from "http-status-codes";
 import sendResponse from "../../utils/sendResponse";
 
 const loginUser = catchAsync(async (req, res) => {
-  const result = await AuthService.loginUser(req.body);
+try {
+    const result = await AuthService.loginUser(req.body);
   console.log(result);
 
 
@@ -27,7 +28,16 @@ const loginUser = catchAsync(async (req, res) => {
       token: accessToken
     }
 
-  })
+  }) 
+} catch (error: any) {
+  res.status(401).json({
+  success: false,
+  message: "Invalid credentials",
+  statusCode: 401,
+  error: error.message || "unknown error occurred",
+  stack: error.stack || "No stack trace available",
+})
+}
 
 });
 
