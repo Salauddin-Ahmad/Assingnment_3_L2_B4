@@ -8,7 +8,8 @@ const router = express.Router();
 
 
 router.post('/',
-    // validateRequest(blogValidations.blogValidationSchema),
+    
+    validateRequest(blogValidations.blogValidationSchema),
     BlogController.createBlogPost,
 )
 
