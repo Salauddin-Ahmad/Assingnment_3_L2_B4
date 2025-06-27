@@ -38,6 +38,8 @@ app.use('*', (req: Request, res: Response) => {
   });
 });
 
+// app.use(globalErrorHandler);
+
 // Error Handling Middleware
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
