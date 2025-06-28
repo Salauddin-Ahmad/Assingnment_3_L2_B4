@@ -1,14 +1,10 @@
 // types/express/index.d.ts
-import { JwtPayload } from "jsonwebtoken";
+import { TJwtPayload } from "../../src/app/modules/auth/auth.interface";
 
 declare global {
   namespace Express {
     interface Request {
-      user?: JwtPayload & {
-        _id: string;
-        role: string;
-        email: string;
-      };
+      user?: TJwtPayload
     }
   }
 }

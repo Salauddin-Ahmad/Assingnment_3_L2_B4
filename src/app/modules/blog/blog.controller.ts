@@ -3,7 +3,8 @@ import { BlogService } from "./blog.service";
 import catchAsync from "../../utils/catchAsync";
 
 const createBlogPost = catchAsync(async (req: Request, res: Response) => { // Assuming req.user is populated by auth middleware
-const authorId = req.user?._id;
+const authorId = req.user?.userId;
+
  const result = await BlogService.createBlogPost({
     ...req.body,
     author: authorId,

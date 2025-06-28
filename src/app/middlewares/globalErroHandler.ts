@@ -1,6 +1,8 @@
 import { ZodError } from "zod";
 import { handleValidationError, handleZodError } from "../error/errorHandlers";
 import handleCastError from "../error/handleCastError";
+import AppError from "../error/AppError";
+import {config} from "../config";
 
 // import { NextFunction, Response, Request } from 'express';
 export type TErrorSources = {
@@ -14,7 +16,7 @@ export type TGenericErrorResponse = {
   errorSources: TErrorSources;
 };
 
-const globalErrorHandler = (error, Req, Res, Next) => {
+const globalErrorHandler = (error, req, res, next) => {
   let errorSources: TErrorSources = [
     {
       path: "",
@@ -40,10 +42,39 @@ const globalErrorHandler = (error, Req, Res, Next) => {
     statusCode = simplifiedError.statusCode;
     message = simplifiedError.message;
     errorSources = simplifiedError.errorSources;
-  } else {
+  } else if (error?.code === 11000) {
     const simplifiedError = 
     statusCode = error.statusCode || 500;
     message = error.message || "Internal Server Error";
-    errorSources = 
+    errorSources = simplifiedError.errorSources;
+  } else if  (error instanceof AppError) {
+    statusCode = error.statusCode || 500;
+    message = error.message || "Internal Server Error";
+    errorSources = [
+      {
+        path: '',
+        message: error.message,
+      }
+    ]
+  } else if (error instanceof Error) {
+    message = error.message;
+    errorSources = [
+      {
+        path: '',
+        message: error.message,
+      }
+    ]
+  } 
 
+
+  res.status(statusCode).json({
+    success: "false",
+    message,
+    errorSources,
+    stack: config.node_env === "development" ? error.stack : undefined,
+  });
+  next(error)
 }
+
+
+export default globalErrorHandler;

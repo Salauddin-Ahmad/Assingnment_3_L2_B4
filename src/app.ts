@@ -2,6 +2,7 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express, { Request, Response, NextFunction, Application } from 'express';
 import router from './app/routes';
+import globalErrorHandler from './app/middlewares/globalErroHandler';
 
 const app: Application = express();
 
@@ -38,7 +39,7 @@ app.use('*', (req: Request, res: Response) => {
   });
 });
 
-// app.use(globalErrorHandler);
+app.use(globalErrorHandler);
 
 // Error Handling Middleware
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {

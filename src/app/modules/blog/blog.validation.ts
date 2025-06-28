@@ -29,10 +29,14 @@ const blogValidationSchema = z.object({
 });
 
 const createBlogPostSchema = z.object({
-  title: z.string().min(3, { message: "Title must be at least 3 characters" }),
-  content: z
-    .string()
-    .min(10, { message: "Content must be at least 10 characters" }),
+  body: z.object({
+    title: z
+      .string()
+      .min(3, { message: "Title must be at least 3 characters" }),
+    content: z
+      .string()
+      .min(10, { message: "Content must be at least 10 characters" }),
+  }),
 });
 
 const updateBlogPost = z.object({

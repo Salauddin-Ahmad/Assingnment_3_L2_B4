@@ -29,6 +29,7 @@ const loginUser = async (payload: TuserLogin) => {
     throw new AppError(StatusCodes.FORBIDDEN, "Password do not matched");
 
   const jwtPayload = {
+    userId: user._id,
     userEmail: user?.email,
     role: user.role,
   };
