@@ -11,7 +11,9 @@ const createBlogPost = async (payload: Tblog) => {
     isPublished: true,
   });
 
-  return blog;
+    // Populate author details (_id, name, email)
+  const populatedBlog = await blog.populate("author", "name email");
+  return populatedBlog;
 };
 
 export const BlogService = {

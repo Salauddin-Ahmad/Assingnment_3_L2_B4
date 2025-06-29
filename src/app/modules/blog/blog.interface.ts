@@ -1,7 +1,9 @@
+import { Types } from "mongoose";
+
 export interface Tblog {
   title: string;
   content: string;
-  author: string;
+  author: Types.ObjectId; // Assuming author is a reference to a user document
   isPublished: boolean;
   createdAt: string;
   updatedAt: string;
