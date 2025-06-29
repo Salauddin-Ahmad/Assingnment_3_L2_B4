@@ -57,7 +57,7 @@ import jwt from "jsonwebtoken";
 import { config } from "../config";
 
 
-export const auth = (...requiredUserRoles: TuserRole[]) => {
+export const     auth = (...requiredUserRoles: TuserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     // ✅ Print ALL headers to verify exactly what's coming in
     console.log("HEADERS:", req.headers);

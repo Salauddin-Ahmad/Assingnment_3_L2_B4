@@ -8,10 +8,12 @@ import { auth } from '../../middlewares/auth';
 const router = express.Router();
 
 
-// router.post('/',
-//     validateRequest(blogValidations.createBlogPostSchema),
-//     BlogController.createBlogPost,
-// )
+// MARK: Hello world 
+// TODO: delete blog post
+
+// #region:1 Create Route to create a blog post
+// #endregion: 
+
 
 router.post(
   '/',
@@ -19,5 +21,22 @@ router.post(
   validateRequest(blogValidations.createBlogPostSchema),
   BlogController.createBlogPost,
 );
+
+
+router.delete(
+  '/:id',
+  auth(), // ⬅️ Require user with 'deleteAny' permission on 'blog'
+  BlogController.deleteBlog, // Assuming you have a deleteBlogPost method in your controller
+
+)
+
+
+
+
+
+
+
+
+
 
 export const BlogRoutes = router;   
